@@ -3,13 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { AssignorModule } from './assignor/assignor.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MONGODB_URI)
+    MongooseModule.forRoot(process.env.MONGODB_URI),
+    AssignorModule
   ],
   controllers: [AppController],
   providers: [AppService],
