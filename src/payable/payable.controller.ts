@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { PayableService } from './payable.service';
 import { CreatePayableDto } from './dto/create-payable.dto';
 import { UpdatePayableDto } from './dto/update-payable.dto';
+import { AuthGuard } from 'src/guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('payable')
 export class PayableController {
   constructor(private readonly payableService: PayableService) {}
@@ -12,6 +14,7 @@ export class PayableController {
     return this.payableService.create(createPayableDto);
   }
 
+  
   @Get()
   findAll() {
     return this.payableService.findAll();

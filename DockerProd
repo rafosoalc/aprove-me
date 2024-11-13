@@ -1,0 +1,13 @@
+FROM alpine:3.19
+
+WORKDIR /home/app
+
+COPY . .
+
+RUN apk add --update nodejs npm git
+
+RUN npm install --quiet --no-fund --loglevel=error
+
+EXPOSE 3000
+
+CMD [ "npm", "start", "dev" ]
