@@ -9,33 +9,32 @@ import { Model } from 'mongoose';
 export class PayableService {
   constructor(
     @InjectModel("Payable")
-    private readonly assignorModel: Model<Payable>
+    private readonly payableModel: Model<Payable>
 
   ) { }
 
   create(createPayableDto: CreatePayableDto) {
-    const assignor = new this.assignorModel(createPayableDto)
-    return assignor.save()
+    const payable = new this.payableModel(createPayableDto)
+    return payable.save()
   }
 
   async findAll() {
-    const assignors = await this.assignorModel.find()
-    return assignors
+    const payables = await this.payableModel.find()
+    return payables
   }
 
   async findOne(id: string) {
-    const assignor = await this.assignorModel.findOne({ _id: id })
-    return assignor
+    const payable = await this.payableModel.findOne({ _id: id })
+    return payable
   }
 
-
   async update(id: string, updatePayableDto: UpdatePayableDto) {
-    const assignor = await this.assignorModel.findOneAndUpdate({ _id: id }, updatePayableDto, { new: true })
-    return assignor
+    const payable = await this.payableModel.findOneAndUpdate({ _id: id }, updatePayableDto, { new: true })
+    return payable
   }
 
   async remove(id: string) {
-    const assignor = await this.assignorModel.findOneAndDelete({_id:id})
-    return assignor
+    const payable = await this.payableModel.findOneAndDelete({ _id: id })
+    return payable
   }
 }
